@@ -1,4 +1,4 @@
-package net.codingme.jms.topic;
+package net.codingme.mq.jms.topic;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
 
@@ -7,12 +7,12 @@ import javax.jms.*;
 /**
  * <p>
  * 主题模式
- * 消息提供者，用于向消息中间件发送消息
+ * 消息消费者，用于消费消息
  *
  * @Author niujinpeng
- * @Date 2018/9/4 23:28
+ * @Date 2018/9/4 23:45
  */
-public class AppProducer {
+public class AppConsumer {
 
     private static final String url = "tcp://127.0.0.1:61616";
     private static final String topicName = "topic-test";
@@ -29,20 +29,22 @@ public class AppProducer {
         Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
         // 5.创建一个目标
         Destination destination = session.createTopic(topicName);
-        // 6.创建生产者
-        MessageProducer producer = session.createProducer(destination);
+        // 6.创建消费者
+        MessageConsumer consumer = session.createConsumer(destination);
 
-        // 7.创建消息并发送
-        for (int i = 0; i < 10; i++) {
-            // 创建消息
-            TextMessage textMessage = session.createTextMessage("textMessage" + i);
-            // 发布消息
-            producer.send(textMessage);
-            System.out.println("发送消息：" + textMessage.getText());
-        }
+        // 7.创建一个监听器
+        consumer.setMessageListener(new MessageListener() {
+            public void onMessage(Message message) {
+                TextMessage textMessage = (TextMessage) message;
+                try {
+                    System.out.println("接收消息：" + textMessage.getText());
+                } catch (JMSException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
         // 8.关闭连接
-        connection.close();
-
+        //connection.close();
     }
 }
