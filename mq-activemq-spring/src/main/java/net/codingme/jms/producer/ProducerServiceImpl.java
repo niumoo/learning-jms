@@ -20,7 +20,16 @@ public class ProducerServiceImpl implements ProducerService {
     @Autowired
     JmsTemplate jmsTemplate;
 
-    @Resource(name = "queueDestination")
+    /**
+     * 队列模式
+     */
+    //@Resource(name = "queueDestination")
+    //Destination destination;
+
+    /**
+     * 主题模式
+     */
+    @Resource(name = "topicDestination")
     Destination destination;
 
     @Override
