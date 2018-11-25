@@ -7,11 +7,15 @@
     <!-- 导入公共配置 -->
     <import resource="common.xml"/>
 
-    <!-- jms模版-->
-    <bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
-        <property name="connectionFactory" ref="connectionFactory"/>
-    </bean>
 
-    <bean class="net.codingme.jms.producer.ProducerServiceImpl"></bean>
+    <!-- 配置消息器 -->
+    <bean id="consumerMessageListener" class="net.codingme.jms.consumer.ConsumerMessageListener"/>
+
+    <!-- 配置消息监听容器 -->
+    <bean id="jmsContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+        <property name="connectionFactory" ref="connectionFactory"/>
+        <property name="destination" ref="queueDestination"/>
+        <property name="messageListener" ref="consumerMessageListener"/>
+    </bean>
 
 </beans>
