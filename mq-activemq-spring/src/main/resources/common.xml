@@ -16,15 +16,14 @@
         <property name="targetConnectionFactory" ref="targerConnectionFactory"/>
     </bean>
 
-    <!-- 一个队列模式目的地，点对点的消息模式 -->
+    <!-- 一个队列模式目的地（队列名称），点对点的消息模式 -->
     <bean id="queueDestination" class="org.apache.activemq.command.ActiveMQQueue">
         <constructor-arg value="queue-spring"/>
     </bean>
 
-    <!-- 一个主题模式目的地，发布订阅消息模式 -->
+    <!-- 一个主题模式目的地（主题名称），发布订阅消息模式 -->
     <bean id="topicDestination" class="org.apache.activemq.command.ActiveMQTopic">
         <constructor-arg value="topic-spring"/>
-
     </bean>
 
 </beans>

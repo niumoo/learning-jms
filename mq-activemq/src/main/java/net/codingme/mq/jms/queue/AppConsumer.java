@@ -1,7 +1,6 @@
 package net.codingme.mq.jms.queue;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
-
 import javax.jms.*;
 
 /**

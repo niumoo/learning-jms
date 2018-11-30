@@ -7,8 +7,7 @@
     <!-- 导入公共配置 -->
     <import resource="common.xml"/>
 
-
-    <!-- 配置消息器 -->
+    <!-- 配置消息监听器 -->
     <bean id="consumerMessageListener" class="net.codingme.jms.consumer.ConsumerMessageListener"/>
 
     <!-- 配置消息监听容器 -->

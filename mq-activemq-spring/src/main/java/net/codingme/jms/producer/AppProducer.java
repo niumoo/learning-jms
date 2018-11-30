@@ -1,7 +1,5 @@
 package net.codingme.jms.producer;
 
-import com.sun.org.apache.bcel.internal.generic.NEW;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
